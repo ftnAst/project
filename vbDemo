@@ -1,0 +1,14 @@
+Imports System.Net
+
+
+Dim webc As New WebClient
+        Dim html As String = webc.DownloadString("https://twitter.com/" & txtUser.Text)
+
+
+        Dim pattern As String = "<p class=""TweetTextSize TweetTextSize--.*? js-tweet-text tweet-text"" lang="".*?"" data-aria-label-part="".*?"">(.*?)</p>"
+
+        Dim match As Match = Regex.Match(html, pattern)
+
+        If match.Success Then
+            txtTweet.Text = match.Groups(1).Value
+        End If
